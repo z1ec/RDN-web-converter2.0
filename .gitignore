@@ -1,0 +1,21 @@
+# Не загружать в Git реальные пароли
+users.py
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+env/
+
+# Uploaded files
+uploads/
+converted/
+
+# IDE
+.vscode/
+.idea/
+
+# System
+.DS_Store

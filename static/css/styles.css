@@ -1,0 +1,12 @@
+body {
+    background-color: #fffdf7;
+}
+
+.navbar {
+    background-color: #ffeeba !important;
+}
+
+.btn-warning {
+    background-color: #ffcb3b;
+    border-color: #ffcb3b;
+}
