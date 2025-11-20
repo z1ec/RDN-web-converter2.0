@@ -2,9 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, send_file,
 import os
 import pandas as pd
 from werkzeug.utils import secure_filename
-from users import USERS
 import importlib
-
+from registration import register_user, validate_user, load_users
 
 app = Flask(__name__)
 app.secret_key = "secret-key-change-me"
@@ -14,23 +13,20 @@ CONVERTED_FOLDER = "converted"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(CONVERTED_FOLDER, exist_ok=True)
 
-# импортируем пользователей и их пароли из файла
-try:
-    from users import USERS
-except ImportError:
-    raise Exception(
-        "Файл users.py не найден. Скопируйте users_example.py → users.py и добавьте пользователей."
-    )
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form["email"]
+        username = request.form["username"]
         password = request.form["password"]
 
-        if email in USERS and USERS[email]["password"] == password:
-            session["user"] = email
-            return redirect(url_for("dashboard"))
+        if validate_user(username, password):
+            session["user"] = username
+            return redirect(url_for("index"))
         else:
             return render_template("login.html", error="Неверный логин или пароль")
 
@@ -43,38 +39,37 @@ def logout():
     return redirect(url_for("index"))
 
 
-# ---------------------------------------
-#             СТРАНИЦЫ
-# ---------------------------------------
-
-@app.route("/")
-def index():
-    return render_template("index.html")
-
 @app.route("/about")
 def about():
     return render_template("about.html")
+
 
 @app.route("/contacts")
 def contacts():
     return render_template("contacts.html")
 
-@app.route("/dashboard", methods=["GET", "POST"])
+
+@app.route("/dashboard")
 def dashboard():
     if "user" not in session:
         return redirect(url_for("login"))
 
-    email = session["user"]                   # email пользователя
-    user_data = USERS[email]                 # словарь данных пользователя
-    password_hidden = "*" * len(user_data["password"])  # скрытый пароль
+    username = session["user"]
+    users = load_users()
+
+    user_data = users.get(username)
+
+    if not user_data:
+        return "Ошибка: пользователь не найден", 404
 
     return render_template(
         "dashboard.html",
-        email=email,
-        password_hidden=password_hidden,
-        templates=user_data.get("template", [])
+        email=username,
+        password_hidden="********",
+        templates=user_data.get("templates", [])
     )
-    
+
+
 @app.route("/convert/<template_id>", methods=["GET", "POST"])
 def convert_template(template_id):
     if "user" not in session:
@@ -126,8 +121,21 @@ def convert_template(template_id):
 
 @app.route("/add_template")
 def add_template():
-    return "<h2>Здесь будет добавление нового шаблона</h2>"
+    return render_template("about.html")
 
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if register_user(username, password):
+            return redirect(url_for("login"))
+        else:
+            return render_template("register.html", error="Логин уже существует")
+
+    return render_template("register.html")
 
 
 if __name__ == "__main__":
