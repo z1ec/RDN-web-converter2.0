@@ -1,5 +1,6 @@
 # Не загружать в Git реальные пароли
 users.py
+users.json
 
 # Python
 __pycache__/
@@ -19,3 +20,5 @@ converted/
 
 # System
 .DS_Store
+
+.xlsx
