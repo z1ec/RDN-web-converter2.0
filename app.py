@@ -26,7 +26,7 @@ def login():
 
         if validate_user(username, password):
             session["user"] = username
-            return redirect(url_for("index"))
+            return redirect(url_for("dashboard"))
         else:
             return render_template("login.html", error="Неверный логин или пароль")
 
@@ -51,10 +51,10 @@ def contacts():
 
 @app.route("/dashboard")
 def dashboard():
-    if "user" not in session:
+    if "username" not in session:
         return redirect(url_for("login"))
 
-    username = session["user"]
+    username = session["username"]
     users = load_users()
 
     user_data = users.get(username)
@@ -131,7 +131,9 @@ def register():
         password = request.form["password"]
 
         if register_user(username, password):
-            return redirect(url_for("login"))
+            session["username"] = username
+
+            return redirect(url_for("dashboard"))
         else:
             return render_template("register.html", error="Логин уже существует")
 
