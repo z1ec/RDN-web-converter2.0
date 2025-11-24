@@ -9,25 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Manrope', 'ui-sans-serif', 'system-ui'],
-                    },
-                    colors: {
-                        sun1: '#FFD271', // primary
-                        sun2: '#BFA66F',
-                        sun3: '#A67D25',
-                        sun4: '#FFDD95',
-                        sun5: '#FFE6B1',
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}?v=1">
 </head>
 
 <body class="min-h-screen flex flex-col bg-white text-slate-900">
