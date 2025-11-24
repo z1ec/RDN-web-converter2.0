@@ -1,11 +1,21 @@
-from werkzeug.security import generate_password_hash, check_password_hash
-from env_utils import load_env
 import json
 import os
+import re
+from werkzeug.security import generate_password_hash, check_password_hash
+from env_utils import load_env
 
 
 load_env()
 USERS_FILE = os.getenv("USERS_FILE")
+
+
+def is_valid_email(value: str) -> bool:
+    """Простая проверка, что логин похож на email."""
+    if not value or not isinstance(value, str):
+        return False
+
+    # Минимальная проверка на наличие части до @, после @ и домена.
+    return re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", value) is not None
 
 
 def load_users():
@@ -26,6 +36,9 @@ def save_users(users):
 
 def register_user(username, password):
     """Регистрирует пользователя. Возвращает True или False."""
+    if not is_valid_email(username):
+        return False
+
     users = load_users()
 
     if username in users:

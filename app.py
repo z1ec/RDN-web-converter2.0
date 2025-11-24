@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file, session
-from registration import register_user, validate_user, load_users
+from registration import register_user, validate_user, load_users, is_valid_email
 from werkzeug.utils import secure_filename
 from env_utils import load_env
 import pandas as pd
@@ -56,8 +56,11 @@ def contacts():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form["username"]
+        username = request.form["username"].strip()
         password = request.form["password"]
+
+        if not is_valid_email(username):
+            return render_template("login.html", error="Используйте email как логин")
 
         if validate_user(username, password):
             session["username"] = username
@@ -70,8 +73,11 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        username = request.form["username"]
+        username = request.form["username"].strip()
         password = request.form["password"]
+
+        if not is_valid_email(username):
+            return render_template("register.html", error="Введите email в качестве логина")
 
         if register_user(username, password):
             session["username"] = username
