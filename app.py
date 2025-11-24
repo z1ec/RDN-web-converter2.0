@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_file, session
+from flask import Flask, render_template, request, redirect, url_for, send_file, send_from_directory, session
 from registration import register_user, validate_user, load_users, is_valid_email
 from werkzeug.utils import secure_filename
 from env_utils import load_env
@@ -30,6 +30,15 @@ os.makedirs(CONVERTED_FOLDER, exist_ok=True)
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory(
+        os.path.join(app.root_path, "static", "img"),
+        "favicon.png",
+        mimetype="image/png",
+    )
 
 @app.route("/logout")
 def logout():
