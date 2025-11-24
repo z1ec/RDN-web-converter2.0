@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
+{% block breadcrumbs %}
+<div class="container mt-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Главная</li>
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
 {% block content %}
 <div class="p-5 mb-4 bg-warning bg-opacity-25 rounded-3 shadow-sm">
     <div class="container-fluid py-5">

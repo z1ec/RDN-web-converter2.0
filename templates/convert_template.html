@@ -1,8 +1,24 @@
 {% extends "base.html" %}
+
+{% block breadcrumbs %}
+<div class="container mt-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('dashboard') }}">Личный кабинет</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Шаблон {{ template_id }}</li>
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
 {% block content %}
 
-<div class="container mt-5" style="max-width: 600px;">
-    <h2 class="mb-4 text-center">Конвертация шаблона {{ template_id }}</h2>
+<div class="container mt-4" style="max-width: 600px;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Конвертация шаблона {{ template_id }}</h2>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary btn-sm">Назад</a>
+    </div>
 
     {% if error %}
         <div class="alert alert-danger">{{ error }}</div>

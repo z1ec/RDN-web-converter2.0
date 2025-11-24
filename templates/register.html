@@ -1,32 +1,38 @@
 {% extends "base.html" %}
 
+{% block breadcrumbs %}
+<div class="container mt-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Регистрация</li>
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
 {% block content %}
+<div class="col-md-5 mx-auto">
+    <h3 class="mb-3">Регистрация</h3>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Регистрация</title>
-</head>
-<body>
-<h1>Регистрация</h1>
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
 
-{% if error %}
-<p style="color:red">{{ error }}</p>
-{% endif %}
+    <form method="POST">
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="text" name="username" class="form-control" placeholder="name@example.com" required>
+        </div>
+        <div class="mb-3">
+            <label>Пароль</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-warning w-100">Зарегистрироваться</button>
+    </form>
 
-<form method="POST">
-    <input type="text" name="username" placeholder="Логин" required><br><br>
-    <input type="password" name="password" placeholder="Пароль" required><br><br>
-    <button type="submit">Зарегистрироваться</button>
-</form>
-
-<a href="{{ url_for('login') }}">Уже есть аккаунт?</a>
-</body>
-</html>
-
-
-
-
-
-
+    <div class="mt-2">
+        <a href="{{ url_for('login') }}">Уже есть аккаунт?</a>
+    </div>
+</div>
 {% endblock %}
