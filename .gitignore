@@ -1,6 +1,7 @@
 # Не загружать в Git реальные пароли
 users.py
 users.json
+.env
 
 # Python
 __pycache__/

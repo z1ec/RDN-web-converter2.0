@@ -1,11 +1,19 @@
+from werkzeug.security import generate_password_hash, check_password_hash
+from env_utils import load_env
 import json
 import os
-from werkzeug.security import generate_password_hash, check_password_hash
 
-USERS_FILE = "users.json"
+
+load_env()
+USERS_FILE = os.getenv("USERS_FILE")
+
 
 def load_users():
     """Загружает всех пользователей из JSON."""
+    if not os.path.exists(USERS_FILE):
+        save_users({})
+        return {}
+
     with open(USERS_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 

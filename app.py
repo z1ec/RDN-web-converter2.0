@@ -1,13 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file, session
 from registration import register_user, validate_user, load_users
 from werkzeug.utils import secure_filename
+from env_utils import load_env
 import pandas as pd
 import importlib
 import os
 
 
+load_env()
+
+
 app = Flask(__name__)
-app.secret_key = "secret-key-change-me"
+app.secret_key = os.getenv("SECRET_KEY")
+
 
 # служебные папки
 UPLOAD_FOLDER = "uploads"
@@ -28,7 +33,7 @@ def index():
 
 @app.route("/logout")
 def logout():
-    session.pop("user", None)
+    session.pop("username", None)
     return redirect(url_for("login"))
 
 
