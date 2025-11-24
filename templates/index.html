@@ -1,23 +1,46 @@
 {% extends "base.html" %}
 
 {% block breadcrumbs %}
-<div class="container mt-3">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Главная</li>
-        </ol>
+<div class="max-w-6xl mx-auto px-4 pt-4 w-full">
+    <nav aria-label="breadcrumb" class="text-left text-sm text-sun3 font-semibold">
+        <span class="text-slate-500">Главная</span>
     </nav>
 </div>
 {% endblock %}
 
 {% block content %}
-<div class="p-5 mb-4 bg-warning bg-opacity-25 rounded-3 shadow-sm">
-    <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Конвертация файлов ГИИС ДМДК</h1>
-        <p class="col-md-8 fs-4">
-            Загрузите Excel-файл из базы ГИИС ДМДК и получите удобный файл для печати.
+<div class="bg-gradient-to-br from-sun1/50 via-sun5/70 to-white rounded-3xl p-10 shadow border border-sun4/70">
+    <div class="max-w-4xl space-y-6 mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/80 text-sun3 rounded-full text-sm font-semibold ring-1 ring-sun4">
+            Настройка под ваши файлы
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-sun3 leading-tight">Конвертация файлов ГИИС ДМДК</h1>
+        <p class="text-lg text-slate-700 max-w-3xl mx-auto">
+            Загружайте Excel из базы ГИИС ДМДК и получайте готовые файлы для печати и учёта. Мы подстраиваем конвертер под ваш формат и освобождаем вас от рутины.
         </p>
-        <a href="/login" class="btn btn-warning btn-lg">Перейти в личный кабинет</a>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+            <a href="{{ url_for('login') }}" class="px-6 py-3 rounded-full bg-sun1 text-slate-900 font-semibold shadow hover:shadow-md transition">
+                Перейти в личный кабинет
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="mt-8 grid md:grid-cols-3 gap-4">
+    <div class="rounded-2xl border border-sun5 bg-white shadow-sm p-5 space-y-2">
+        <p class="text-sm font-semibold text-sun3 uppercase tracking-wide">Быстро</p>
+        <p class="font-bold text-xl text-slate-900">Загрузка и конвертация</p>
+        <p class="text-slate-700 text-sm">Прикрепите Excel и сразу получите результат в нужном формате.</p>
+    </div>
+    <div class="rounded-2xl border border-sun5 bg-white shadow-sm p-5 space-y-2">
+        <p class="text-sm font-semibold text-sun3 uppercase tracking-wide">Гибко</p>
+        <p class="font-bold text-xl text-slate-900">Индивидуальные шаблоны</p>
+        <p class="text-slate-700 text-sm">Поддерживаем разные структуры данных и дорабатываем под ваши задачи.</p>
+    </div>
+    <div class="rounded-2xl border border-sun5 bg-white shadow-sm p-5 space-y-2">
+        <p class="text-sm font-semibold text-sun3 uppercase tracking-wide">Надёжно</p>
+        <p class="font-bold text-xl text-slate-900">Готово к печати</p>
+        <p class="text-slate-700 text-sm">Выводим аккуратные файлы для печати и учёта без ручной правки.</p>
     </div>
 </div>
 {% endblock %}

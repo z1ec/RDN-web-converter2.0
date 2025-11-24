@@ -1,47 +1,58 @@
 {% extends "base.html" %}
 
 {% block breadcrumbs %}
-<div class="container mt-3">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Главная</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Личный кабинет</li>
-        </ol>
+<div class="max-w-6xl mx-auto px-4 pt-4 w-full">
+    <nav aria-label="breadcrumb" class="text-left text-sm font-semibold text-sun3">
+        <a class="hover:underline" href="{{ url_for('index') }}">Главная</a>
+        <span class="text-slate-400"> / </span>
+        <span class="text-slate-600">Личный кабинет</span>
     </nav>
 </div>
 {% endblock %}
 
 {% block content %}
 
-<div class="container mt-4" style="max-width: 600px;">
-    <h2 class="mb-4 text-center">Личный кабинет</h2>
+<div class="grid lg:grid-cols-3 gap-6">
+    <div class="lg:col-span-1 bg-white border border-sun5 rounded-2xl shadow p-6 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-sun1 text-slate-900 rounded-full text-xs font-semibold uppercase tracking-wide">
+            Профиль
+        </div>
+        <h2 class="text-2xl font-bold text-sun3">Личный кабинет</h2>
+        <div class="space-y-2 text-slate-700">
+            <p><span class="font-semibold text-sun2">Почта:</span> {{ email }}</p>
+            <p><span class="font-semibold text-sun2">Пароль:</span> {{ password_hidden }}</p>
+        </div>
+        <a class="inline-flex justify-center w-full rounded-xl bg-slate-900 text-white font-semibold py-3 hover:bg-slate-700 transition" href="/logout">Выйти</a>
+    </div>
 
-    <div class="card shadow-sm p-4">
-        <h5>Данные пользователя</h5>
-        <hr>
+    <div class="lg:col-span-2 bg-white border border-sun5 rounded-2xl shadow p-6 space-y-4">
+        <div class="flex items-center justify-between">
+            <div class="space-y-1">
+                <p class="text-xs font-semibold uppercase tracking-wide text-sun2">Ваши шаблоны</p>
+                <h3 class="text-2xl font-bold text-sun3">Конвертеры</h3>
+            </div>
+            <a href="{{ url_for('contacts') }}" class="px-4 py-2 rounded-xl border border-sun3 text-sun3 font-semibold hover:bg-sun5 transition">Добавить шаблон</a>
+        </div>
 
-        <p><strong>Почта:</strong> {{ email }}</p>
-        <p><strong>Пароль:</strong> {{ password_hidden }}</p>
-        <a class="btn btn-primary col-sm-3" href="/logout">Выход</a>
-
-
-
-
-        <h5 class="mt-4">Ваши шаблоны</h5>
-        <ul class="list-group mb-3">
+        <div class="divide-y divide-sun5 border border-sun5 rounded-2xl overflow-hidden">
             {% for template in templates %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Шаблон: <strong>{{ template }}</strong></span>
-
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-sun5 flex items-center justify-center font-bold text-sun3">{{ template }}</div>
+                        <div>
+                            <p class="font-semibold text-slate-800">Шаблон {{ template }}</p>
+                            <p class="text-xs text-slate-500">Обработка данных и выгрузка в Excel</p>
+                        </div>
+                    </div>
                     <a href="{{ url_for('convert_template', template_id=template) }}"
-                       class="btn btn-primary btn-sm">
+                       class="px-4 py-2 rounded-xl bg-sun1 text-slate-900 font-semibold hover:shadow-md transition">
                         Открыть
                     </a>
-                </li>
+                </div>
+            {% else %}
+                <div class="px-4 py-6 text-center text-slate-500">Пока нет доступных шаблонов.</div>
             {% endfor %}
-        </ul>
-
-        <a href="{{ url_for('add_template') }}" class="btn btn-secondary w-100">Добавить шаблон</a>
+        </div>
     </div>
 </div>
 

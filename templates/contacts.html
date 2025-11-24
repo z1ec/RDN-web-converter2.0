@@ -1,27 +1,38 @@
 {% extends "base.html" %}
 
 {% block breadcrumbs %}
-<div class="container mt-3">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Главная</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Контакты</li>
-        </ol>
+<div class="max-w-6xl mx-auto px-4 pt-4 w-full">
+    <nav aria-label="breadcrumb" class="text-left text-sm font-semibold text-sun3">
+        <a class="hover:underline" href="{{ url_for('index') }}">Главная</a>
+        <span class="text-slate-400"> / </span>
+        <span class="text-slate-600">Контакты</span>
     </nav>
 </div>
 {% endblock %}
 
 {% block content %}
-<h2>Контакты</h2>
-
-<p class="lead">Чтобы настроить ваш конвертер — пришлите:</p>
-<ul>
-    <li>пример вашего файла .xlsx</li>
-    <li>как должен выглядеть конечный результат</li>
-    <li>ваш email для доступа</li>
-</ul>
-
-<p class="mt-3">
-    <strong>Email:</strong> htt6487@yandex.ru<br>
-</p>
+<div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-white border border-sun5 rounded-2xl shadow p-8 space-y-4">
+        <div class="inline-flex items-center gap-2 px-5 py-3 bg-sun1 text-slate-900 rounded-full text-xs font-semibold uppercase tracking-wide">
+            Свяжитесь с нами
+        </div>
+        <h2 class="text-3xl font-bold text-sun3">Что указать в письме?</h2>
+        <p class="text-lg text-slate-700">Чтобы настроить ваш конвертер — пришлите:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-700">
+            <li>пример вашего файла .xlsx</li>
+            <li>как должен выглядеть конечный результат</li>
+            <li>ваш email (логин личного кабинета) для доступа</li>
+        </ul>
+    </div>
+    <div class="bg-sun5/70 border border-sun4 rounded-2xl shadow p-8 space-y-4">
+        <h3 class="text-xl font-bold text-sun3">Написать письмо</h3>
+        <p class="text-slate-700">
+            <strong class="text-sun3">Email:</strong> htt6487@yandex.ru
+        </p>
+        <p class="text-sm text-slate-600">Отвечаем быстро и помогаем на всех этапах внедрения.</p>
+        <a href="mailto:htt6487@yandex.ru" class="inline-flex px-5 py-3 rounded-xl bg-sun1 text-slate-900 font-semibold shadow hover:shadow-md transition">
+            Открыть почту
+        </a>
+    </div>
+</div>
 {% endblock %}

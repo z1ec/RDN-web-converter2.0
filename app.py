@@ -165,10 +165,5 @@ def convert_template(template_id):
     return render_template("convert_template.html", template_id=template_id)
 
 
-@app.route("/add_template")
-def add_template():
-    return render_template("about.html")
-
-
 if __name__ == "__main__":
     app.run(debug=True)

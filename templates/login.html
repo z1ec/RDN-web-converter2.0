@@ -1,37 +1,45 @@
 {% extends "base.html" %}
 
 {% block breadcrumbs %}
-<div class="container mt-3">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Главная</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Вход</li>
-        </ol>
+<div class="max-w-6xl mx-auto px-4 pt-4 w-full">
+    <nav aria-label="breadcrumb" class="text-left text-sm font-semibold text-sun3">
+        <a class="hover:underline" href="{{ url_for('index') }}">Главная</a>
+        <span class="text-slate-400"> / </span>
+        <span class="text-slate-600">Вход</span>
     </nav>
 </div>
 {% endblock %}
 
 {% block content %}
-<div class="col-md-5 mx-auto">
-    <h3 class="mb-3">Вход в личный кабинет</h3>
+<div class="max-w-2xl mx-auto bg-white border border-sun5 rounded-2xl shadow p-8 space-y-6">
+    <div class="space-y-1">
+        <h3 class="text-3xl font-bold text-sun3 text-center">Вход в личный кабинет</h3>
+    </div>
 
     {% if error %}
-        <div class="alert alert-danger">{{ error }}</div>
+        <div class="rounded-xl bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm">
+            {{ error }}
+        </div>
     {% endif %}
 
-    <form method="POST">
-        <div class="mb-3">
-            <label>Email</label>
-            <input name="username" type="email" class="form-control" placeholder="name@example.com" required>
-        </div>
+    <form method="POST" class="space-y-4">
+        <label class="block space-y-1">
+            <span class="text-sm font-semibold text-slate-700">Email</span>
+            <input name="username" type="email" class="w-full rounded-xl border border-sun5 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sun3/60" placeholder="name@example.com" required>
+            <span class="text-xs text-slate-500">Логин — ваш email.</span>
+        </label>
 
-        <div class="mb-3">
-            <label>Пароль</label>
-            <input name="password" type="password" class="form-control" required>
-        </div>
+        <label class="block space-y-1">
+            <span class="text-sm font-semibold text-slate-700">Пароль</span>
+            <input name="password" type="password" class="w-full rounded-xl border border-sun5 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sun3/60" required>
+        </label>
 
-        <button class="btn btn-warning w-100">Войти</button>
-        <a href="{{ url_for('register') }}">Создать аккаунт</a>
+        <button class="w-full rounded-xl bg-sun1 text-slate-900 font-semibold py-3 shadow hover:shadow-md transition">Войти</button>
     </form>
+
+    <div class="text-sm text-slate-600 text-center">
+        Нет аккаунта?
+        <a class="text-sun3 font-semibold hover:underline" href="{{ url_for('register') }}">Создать аккаунт</a>
+    </div>
 </div>
 {% endblock %}

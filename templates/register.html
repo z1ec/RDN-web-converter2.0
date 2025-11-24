@@ -1,39 +1,43 @@
 {% extends "base.html" %}
 
 {% block breadcrumbs %}
-<div class="container mt-3">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Главная</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Регистрация</li>
-        </ol>
+<div class="max-w-6xl mx-auto px-4 pt-4 w-full">
+    <nav aria-label="breadcrumb" class="text-left text-sm font-semibold text-sun3">
+        <a class="hover:underline" href="{{ url_for('index') }}">Главная</a>
+        <span class="text-slate-400"> / </span>
+        <span class="text-slate-600">Регистрация</span>
     </nav>
 </div>
 {% endblock %}
 
 {% block content %}
-<div class="col-md-5 mx-auto">
-    <h3 class="mb-3">Регистрация</h3>
+<div class="max-w-2xl mx-auto bg-white border border-sun5 rounded-2xl shadow p-8 space-y-6">
+    <div class="space-y-1">
+        <h3 class="text-3xl font-bold text-sun3 text-center">Регистрация</h3>
+    </div>
 
     {% if error %}
-        <div class="alert alert-danger">{{ error }}</div>
+        <div class="rounded-xl bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm">
+            {{ error }}
+        </div>
     {% endif %}
 
-    <form method="POST">
-        <div class="mb-3">
-            <label>Email</label>
-            <input type="email" name="username" class="form-control" placeholder="name@example.com" required>
-            <div class="form-text">Используйте действующий email — это ваш логин.</div>
-        </div>
-        <div class="mb-3">
-            <label>Пароль</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-warning w-100">Зарегистрироваться</button>
+    <form method="POST" class="space-y-4">
+        <label class="block space-y-1">
+            <span class="text-sm font-semibold text-slate-700">Email</span>
+            <input type="email" name="username" class="w-full rounded-xl border border-sun5 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sun3/60" placeholder="name@example.com" required>
+            <span class="text-xs text-slate-500">Используйте действующий email — это ваш логин.</span>
+        </label>
+        <label class="block space-y-1">
+            <span class="text-sm font-semibold text-slate-700">Пароль</span>
+            <input type="password" name="password" class="w-full rounded-xl border border-sun5 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sun3/60" required>
+        </label>
+        <button type="submit" class="w-full rounded-xl bg-sun1 text-slate-900 font-semibold py-3 shadow hover:shadow-md transition">Зарегистрироваться</button>
     </form>
 
-    <div class="mt-2">
-        <a href="{{ url_for('login') }}">Уже есть аккаунт?</a>
+    <div class="text-sm text-slate-600 text-center">
+        Уже есть аккаунт?
+        <a class="text-sun3 font-semibold hover:underline" href="{{ url_for('login') }}">Войти</a>
     </div>
 </div>
 {% endblock %}
