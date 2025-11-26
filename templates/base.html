@@ -13,14 +13,15 @@
 
 <body class="min-h-screen flex flex-col bg-white text-slate-900">
 <header class="shadow-sm">
-    <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="{{ url_for('index') }}" class="text-xl font-bold text-sun3">web-converter.ru</a>
-        <div class="flex items-center gap-2 text-sm font-semibold">
+    <nav class="max-w-6xl w-full mx-auto px-4 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-6">
+        <a href="{{ url_for('index') }}" class="text-xl font-bold text-sun3 text-center md:text-left w-full md:w-auto shrink-0 whitespace-nowrap">web-converter.ru</a>
+        <div class="flex flex-wrap items-center justify-center md:justify-end gap-2 text-sm font-semibold w-full md:flex-1 md:pl-6">
+
             {% set ep = request.endpoint %}
             {% macro nav_link(label, endpoint) -%}
                 {%- set active = (ep == endpoint) -%}
                 <a href="{{ url_for(endpoint) }}"
-                   class="px-3 py-2 rounded-full transition {{ 'bg-sun1 text-slate-900 shadow-sm' if active else 'hover:bg-sun5 text-slate-800' }}">
+                   class="px-3 py-2 rounded-full transition text-center md:text-left {{ 'bg-sun1 text-slate-900 shadow-sm' if active else 'hover:bg-sun5 text-slate-800' }}">
                     {{ label }}
                 </a>
             {%- endmacro %}
