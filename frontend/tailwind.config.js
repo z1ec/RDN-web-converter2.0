@@ -2,8 +2,10 @@
 module.exports = {
   content: [
     "./templates/**/*.html",
-    "./app.py",
+    "../app.py",
+    "./**/*.js",
   ],
+  // safelist: [{ pattern: /.*/ }], //убрать строку перед отправкой в прод и перебилдить стили для tailwind 
   theme: {
     extend: {
       fontFamily: {

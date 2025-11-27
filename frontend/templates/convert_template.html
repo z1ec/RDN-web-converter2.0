@@ -30,9 +30,9 @@
     {% endif %}
 
     <form method="POST" enctype="multipart/form-data" class="space-y-4">
-        <label class="block space-y-1">
+        <label for="excel-file" class="block space-y-1">
             <span class="text-sm font-semibold text-slate-700">Выберите файл Excel</span>
-            <input type="file" name="file" class="w-full rounded-xl border border-sun5 px-4 py-3 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-sun4 file:text-sun3 file:font-semibold file:hover:bg-sun5 focus:outline-none focus:ring-2 focus:ring-sun3/60" required>
+            <input id="excel-file" type="file" name="file" class="w-full rounded-xl border border-sun5 px-4 py-3 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-sun4 file:text-sun3 file:font-semibold file:hover:bg-sun5 focus:outline-none focus:ring-2 focus:ring-sun3/60" required>
         </label>
         <button class="w-full rounded-xl bg-sun1 text-slate-900 font-semibold py-3 shadow hover:shadow-md transition">Конвертировать</button>
     </form>

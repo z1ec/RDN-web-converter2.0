@@ -23,14 +23,14 @@
     {% endif %}
 
     <form method="POST" class="space-y-4">
-        <label class="block space-y-1">
+        <label for="register-email" class="block space-y-1">
             <span class="text-sm font-semibold text-slate-700">Email</span>
-            <input type="email" name="username" class="w-full rounded-xl border border-sun5 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sun3/60" placeholder="name@example.com" required>
+            <input id="register-email" type="email" name="username" class="w-full rounded-xl border border-sun5 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sun3/60" placeholder="name@example.com" required>
             <span class="text-xs text-slate-500">Используйте действующий email — это ваш логин.</span>
         </label>
-        <label class="block space-y-1">
+        <label for="register-password" class="block space-y-1">
             <span class="text-sm font-semibold text-slate-700">Пароль</span>
-            <input type="password" name="password" class="w-full rounded-xl border border-sun5 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sun3/60" required>
+            <input id="register-password" type="password" name="password" class="w-full rounded-xl border border-sun5 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sun3/60" required>
         </label>
         <button type="submit" class="w-full rounded-xl bg-sun1 text-slate-900 font-semibold py-3 shadow hover:shadow-md transition">Зарегистрироваться</button>
     </form>

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file, send_from_directory, session
-from registration import register_user, validate_user, load_users, is_valid_email
+from backend.registration import register_user, validate_user, load_users, is_valid_email
 from werkzeug.utils import secure_filename
-from env_utils import load_env
+from backend.env_utils import load_env
 import pandas as pd
 import importlib
 import os
@@ -10,7 +10,11 @@ import os
 load_env()
 
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder="frontend/templates",
+    static_folder="frontend/static",
+)
 app.secret_key = os.getenv("SECRET_KEY")
 
 
@@ -19,6 +23,7 @@ UPLOAD_FOLDER = "uploads"
 CONVERTED_FOLDER = "converted"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(CONVERTED_FOLDER, exist_ok=True)
+STATIC_IMG_FOLDER = os.path.join(app.root_path, "frontend", "static", "img")
 
 
 # ------------------------------------------
@@ -35,7 +40,7 @@ def index():
 @app.route("/favicon.ico")
 def favicon():
     return send_from_directory(
-        os.path.join(app.root_path, "static", "img"),
+        STATIC_IMG_FOLDER,
         "favicon.png",
         mimetype="image/png",
     )
@@ -146,7 +151,7 @@ def convert_template(template_id):
 
         try:
             # Загружаем обработчик по имени
-            module = importlib.import_module(f"processors.process_{template_id}")
+            module = importlib.import_module(f"backend.processors.process_{template_id}")
 
             # Выполняем обработку
             df = module.process(upload_path)
